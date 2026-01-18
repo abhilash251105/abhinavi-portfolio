@@ -1,14 +1,9 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-/* Note for Piku: 
-   In Tailwind v4, this single import replaces the old 
-   @tailwind base, components, and utilities. 
-*/
-
-:root {
-  color-scheme: dark;
-}
-
-html {
-  scroll-behavior: smooth;
+@layer base {
+  body {
+    @apply bg-neutral-950 text-neutral-100 font-sans;
+  }
 }
