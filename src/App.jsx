@@ -1,15 +1,17 @@
-// import AppRouter from "./router/AppRouter.jsx";
-// import Navbar from "./components/Navbar.jsx";
+// import { AnimatePresence } from "framer-motion";
+// import AppRouter from "./router/AppRouter";
+// import Navbar from "./components/Navbar";
 
 // export default function App() {
 //   return (
 //     <>
 //       <Navbar />
-//       <AppRouter />
+//       <AnimatePresence mode="wait">
+//         <AppRouter />
+//       </AnimatePresence>
 //     </>
 //   );
 // }
-
 import { AnimatePresence } from "framer-motion";
 import AppRouter from "./router/AppRouter";
 import Navbar from "./components/Navbar";
@@ -17,10 +19,12 @@ import Navbar from "./components/Navbar";
 export default function App() {
   return (
     <>
-      <Navbar />
-      <AnimatePresence mode="wait">
-        <AppRouter />
-      </AnimatePresence>
+      <Navbar />      
+      <main className="pt-20">
+        <AnimatePresence mode="wait">
+          <AppRouter />
+        </AnimatePresence>
+      </main>
     </>
   );
 }

@@ -1,381 +1,122 @@
-// import { motion } from "framer-motion";
-// import { Link } from "react-router-dom";
-
-// export default function Home() {
-//   return (
-//     <main className="bg-neutral-950 text-white overflow-hidden">
-
-//       {/* ================= NAVBAR ================= */}
-//       <header className="fixed top-0 w-full z-50 backdrop-blur-md bg-black/40 border-b border-white/10">
-//         <nav className="max-w-7xl mx-auto px-8 py-4 flex items-center justify-between">
-//           <div className="text-xl font-semibold tracking-tight">
-//             Abhinavi
-//           </div>
-
-//           <div className="hidden md:flex gap-8 text-sm text-gray-300">
-//             {["About", "Experience", "Projects", "Contact"].map(item => (
-//               <Link
-//                 key={item}
-//                 to={`/${item.toLowerCase()}`}
-//                 className="relative group"
-//               >
-//                 {item}
-//                 <span className="absolute left-0 -bottom-1 w-0 h-[1px] bg-white transition-all group-hover:w-full" />
-//               </Link>
-//             ))}
-//           </div>
-
-//           <Link
-//             to="/contact"
-//             className="px-5 py-2 rounded-full bg-white text-black text-sm font-medium hover:scale-105 transition"
-//           >
-//             Get in touch
-//           </Link>
-//         </nav>
-//       </header>
-
-//       {/* ================= HERO ================= */}
-//       <section className="min-h-screen flex items-center pt-32 relative">
-//         <motion.div
-//           initial={{ opacity: 0, y: 40 }}
-//           animate={{ opacity: 1, y: 0 }}
-//           transition={{ duration: 1, ease: "easeOut" }}
-//           className="max-w-6xl mx-auto px-8 text-center"
-//         >
-//           <h1 className="text-6xl md:text-7xl font-bold leading-tight tracking-tight">
-//             Building <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-400">reliable</span><br />
-//             cloud systems.
-//           </h1>
-
-//           <p className="mt-6 text-lg text-gray-400 max-w-2xl mx-auto">
-//             Software Engineer focused on DevOps, SRE, Cloud Infrastructure,
-//             and production-grade systems.
-//           </p>
-
-//           <div className="mt-10 flex justify-center gap-4">
-//             <Link
-//               to="/projects"
-//               className="px-8 py-4 rounded-full bg-white text-black font-medium hover:shadow-xl hover:scale-105 transition"
-//             >
-//               View Projects
-//             </Link>
-
-//             <Link
-//               to="/experience"
-//               className="px-8 py-4 rounded-full border border-white/30 hover:border-white transition"
-//             >
-//               Experience
-//             </Link>
-//           </div>
-//         </motion.div>
-
-//         {/* Background gradient */}
-//         <div className="absolute inset-0 -z-10 bg-gradient-to-br from-neutral-900 via-black to-neutral-950" />
-//       </section>
-
-//       {/* ================= TRUST ================= */}
-//       <section className="py-24">
-//         <motion.div
-//           initial={{ opacity: 0 }}
-//           whileInView={{ opacity: 1 }}
-//           viewport={{ once: true }}
-//           transition={{ duration: 1 }}
-//           className="max-w-6xl mx-auto px-8 text-center"
-//         >
-//           <p className="text-gray-400 mb-10">
-//             Trusted by teams working on mission-critical systems
-//           </p>
-
-//           <div className="flex flex-wrap justify-center gap-10 text-gray-500 text-lg">
-//             <span className="hover:text-white transition">AWS</span>
-//             <span className="hover:text-white transition">KFintech</span>
-//             <span className="hover:text-white transition">Data Platforms</span>
-//             <span className="hover:text-white transition">Enterprise Systems</span>
-//           </div>
-//         </motion.div>
-//       </section>
-
-//       {/* ================= FEATURES ================= */}
-//       <section className="py-24 bg-neutral-900/40">
-//         <div className="max-w-7xl mx-auto px-8 grid md:grid-cols-3 gap-8">
-//           {[
-//             {
-//               title: "Cloud & DevOps",
-//               desc: "AWS, CI/CD, automation, cost-aware infrastructure design."
-//             },
-//             {
-//               title: "SRE & Monitoring",
-//               desc: "Production monitoring, alerting, reliability, and incident response."
-//             },
-//             {
-//               title: "Data Engineering",
-//               desc: "ETL pipelines, Glue, EMR, SQL, and large-scale processing."
-//             }
-//           ].map((item, i) => (
-//             <motion.div
-//               key={i}
-//               initial={{ opacity: 0, y: 40 }}
-//               whileInView={{ opacity: 1, y: 0 }}
-//               viewport={{ once: true }}
-//               transition={{ delay: i * 0.15 }}
-//               className="rounded-2xl p-8 backdrop-blur bg-white/5 border border-white/10 hover:bg-white/10 hover:shadow-xl transition"
-//             >
-//               <h3 className="text-xl font-semibold mb-3">{item.title}</h3>
-//               <p className="text-gray-400">{item.desc}</p>
-//             </motion.div>
-//           ))}
-//         </div>
-//       </section>
-
-//       {/* ================= CTA ================= */}
-//       <section className="py-32">
-//         <motion.div
-//           initial={{ opacity: 0, scale: 0.95 }}
-//           whileInView={{ opacity: 1, scale: 1 }}
-//           viewport={{ once: true }}
-//           transition={{ duration: 0.8 }}
-//           className="max-w-5xl mx-auto px-8 text-center"
-//         >
-//           <h2 className="text-4xl md:text-5xl font-bold mb-6">
-//             Let’s build something<br />that scales.
-//           </h2>
-
-//           <p className="text-gray-400 mb-10">
-//             Open to DevOps, SRE, and Cloud engineering roles.
-//           </p>
-
-//           <Link
-//             to="/contact"
-//             className="inline-block px-10 py-4 rounded-full bg-gradient-to-r from-white to-gray-300 text-black font-medium hover:scale-105 transition"
-//           >
-//             Start a conversation
-//           </Link>
-//         </motion.div>
-//       </section>
-
-//       {/* ================= FOOTER ================= */}
-//       <footer className="border-t border-white/10 py-10 text-center text-gray-500 text-sm">
-//         © {new Date().getFullYear()} Abhinavi • Built with precision
-//       </footer>
-
-//     </main>
-//   );
-// }
-import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { useEffect, useState, useRef } from "react";
+import { Link } from "react-router-dom";
 
-/* ================= FLOATING SHAPES ================= */
-function FloatingShapes() {
-  return (
-    <div className="absolute inset-0 overflow-hidden pointer-events-none">
-      <motion.div
-        animate={{ y: [0, -40, 0] }}
-        transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute top-20 left-20 w-72 h-72 rounded-full bg-gradient-to-br from-indigo-500/20 to-purple-500/10 blur-3xl"
-      />
-      <motion.div
-        animate={{ y: [0, 60, 0] }}
-        transition={{ duration: 16, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute bottom-20 right-20 w-96 h-96 rounded-full bg-gradient-to-br from-cyan-400/20 to-blue-500/10 blur-3xl"
-      />
-    </div>
-  );
-}
-
-/* ================= MAGNETIC BUTTON ================= */
-function MagneticButton({ children, to, primary }) {
-  const ref = useRef(null);
-
-  function move(e) {
-    const rect = ref.current.getBoundingClientRect();
-    const x = e.clientX - rect.left - rect.width / 2;
-    const y = e.clientY - rect.top - rect.height / 2;
-    ref.current.style.transform = `translate(${x * 0.15}px, ${y * 0.15}px)`;
-  }
-
-  function reset() {
-    ref.current.style.transform = "translate(0,0)";
-  }
-
-  return (
-    <Link to={to}>
-      <motion.button
-        ref={ref}
-        onMouseMove={move}
-        onMouseLeave={reset}
-        whileHover={{ scale: 1.05 }}
-        className={`px-8 py-4 rounded-full font-medium transition ${
-          primary
-            ? "bg-white text-black hover:shadow-xl"
-            : "border border-white/30 hover:border-white"
-        }`}
-      >
-        {children}
-      </motion.button>
-    </Link>
-  );
-}
-
-/* ================= TESTIMONIALS ================= */
-function Testimonials() {
-  const data = [
-    {
-      text: "Abhilash brings ownership and clarity to complex production systems.",
-      name: "Senior Engineer",
-      role: "Cloud Platform"
-    },
-    {
-      text: "Strong DevOps mindset with real-world AWS and monitoring experience.",
-      name: "Tech Lead",
-      role: "Infrastructure"
-    },
-    {
-      text: "Reliable engineer who understands scale, cost, and stability.",
-      name: "Manager",
-      role: "Data Systems"
-    }
-  ];
-
-  const [index, setIndex] = useState(0);
-
-  useEffect(() => {
-    const id = setInterval(() => {
-      setIndex((i) => (i + 1) % data.length);
-    }, 4500);
-    return () => clearInterval(id);
-  }, []);
-
-  return (
-    <motion.div
-      key={index}
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6 }}
-      className="max-w-3xl mx-auto p-8 rounded-2xl backdrop-blur bg-white/5 border border-white/10 text-center"
-    >
-      <p className="text-gray-300 mb-6 text-lg">“{data[index].text}”</p>
-      <div className="text-sm text-gray-400">
-        <strong className="text-white">{data[index].name}</strong> ·{" "}
-        {data[index].role}
-      </div>
-    </motion.div>
-  );
-}
-
-/* ================= HOME PAGE ================= */
 export default function Home() {
   return (
-    <motion.main
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      className="bg-neutral-950 text-white overflow-hidden"
-    >
-      {/* ================= HERO ================= */}
-      <section className="relative min-h-screen flex items-center pt-32">
-        <FloatingShapes />
+    <main className="relative min-h-screen bg-black text-white overflow-hidden">
 
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
+      {/* HERO SECTION */}
+      <section className="relative flex flex-col items-center justify-center text-center px-6 pt-40 pb-32">
+        {/* Background gradient */}
+        <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/20 via-purple-500/10 to-pink-500/20 blur-3xl" />
+
+        <motion.h1
+          initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, ease: "easeOut" }}
-          className="max-w-6xl mx-auto px-8 text-center relative z-10"
+          transition={{ duration: 0.8 }}
+          className="relative text-4xl md:text-6xl font-semibold tracking-tight max-w-4xl"
         >
-          <h1 className="text-6xl md:text-7xl font-bold leading-tight tracking-tight">
-            Building{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-400">
-              reliable
-            </span>
-            <br />
-            cloud systems.
-          </h1>
+          Building{" "}
+          <span className="bg-gradient-to-r from-indigo-400 to-pink-400 bg-clip-text text-transparent">
+            reliable cloud systems
+          </span>
+          .
+        </motion.h1>
 
-          <p className="mt-6 text-lg text-gray-400 max-w-2xl mx-auto">
-            Software Engineer focused on DevOps, SRE, Cloud Infrastructure,
-            and production-grade systems.
-          </p>
-
-          <div className="mt-10 flex justify-center gap-4 flex-wrap">
-            <MagneticButton to="/projects" primary>
-              View Projects
-            </MagneticButton>
-            <MagneticButton to="/experience">
-              Experience
-            </MagneticButton>
-          </div>
-        </motion.div>
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.15 }}
+          className="relative mt-6 text-neutral-400 max-w-2xl"
+        >
+          Software Engineer focused on DevOps, SRE, Cloud Infrastructure,
+          and production-grade systems that scale.
+        </motion.p>
       </section>
 
-      {/* ================= TRUST ================= */}
-      <section className="py-24">
+      {/* MULTI-DOMAIN EXPERTISE */}
+      <section className="relative px-6 pb-32 text-center">
+        <p className="text-xs uppercase tracking-widest text-neutral-500 mb-4">
+          Multi-domain engineering expertise
+        </p>
+
+        <blockquote className="max-w-3xl mx-auto text-lg md:text-xl text-neutral-300 leading-relaxed italic">
+          “Engineering resilient, scalable systems across Cloud Platforms,
+          Data Engineering, DevOps, SRE, Databases, AI/ML, and Networking —
+          with a systems-first mindset that bridges infrastructure, data,
+          and intelligence.”
+        </blockquote>
+
+        <p className="mt-4 text-sm text-neutral-500">
+          End-to-end ownership across modern production systems.
+        </p>
+      </section>
+
+      {/* FEATURE CARDS */}
+      <section className="relative px-6 pb-32 grid gap-6 md:grid-cols-3 max-w-6xl mx-auto">
+        {[
+          {
+            title: "Cloud & DevOps",
+            desc: "AWS, CI/CD pipelines, automation, and cost-aware infrastructure.",
+          },
+          {
+            title: "SRE & Reliability",
+            desc: "Monitoring, alerting, SLIs/SLOs, and production resilience.",
+          },
+          {
+            title: "Data Platforms",
+            desc: "ETL pipelines, Glue, EMR, SQL, and scalable data systems.",
+          },
+        ].map((item, i) => (
+          <motion.div
+            key={i}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: i * 0.1 }}
+            className="bg-white/5 border border-white/10 rounded-2xl p-6 backdrop-blur hover:bg-white/10 transition"
+          >
+            <h3 className="text-lg font-medium mb-2">{item.title}</h3>
+            <p className="text-sm text-neutral-400">{item.desc}</p>
+          </motion.div>
+        ))}
+      </section>
+
+      {/* TESTIMONIAL */}
+      <section className="relative px-6 pb-32 text-center">
         <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
+          initial={{ opacity: 0, scale: 0.95 }}
+          whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
-          transition={{ duration: 1 }}
-          className="text-center"
+          transition={{ duration: 0.6 }}
+          className="max-w-3xl mx-auto bg-white/5 border border-white/10 rounded-2xl p-8 backdrop-blur"
         >
-          <p className="text-gray-400 mb-10">
-            Experience with mission-critical systems
+          <p className="text-neutral-300 italic">
+            “Strong DevOps mindset with real-world AWS and monitoring experience.
+            Delivers reliable systems under pressure.”
           </p>
-          <div className="flex justify-center gap-12 text-gray-500 text-lg">
-            <span className="hover:text-white transition">AWS</span>
-            <span className="hover:text-white transition">KFintech</span>
-            <span className="hover:text-white transition">DevOps</span>
-            <span className="hover:text-white transition">SRE</span>
-          </div>
+          <p className="mt-4 text-sm text-neutral-500">
+            — Tech Lead, Infrastructure
+          </p>
         </motion.div>
       </section>
 
-      {/* ================= FEATURES ================= */}
-      <section className="py-24 bg-neutral-900/40">
-        <div className="max-w-7xl mx-auto px-8 grid md:grid-cols-3 gap-8">
-          {[
-            ["Cloud & DevOps", "AWS, CI/CD, automation, cost-aware infra"],
-            ["SRE & Monitoring", "Alerts, dashboards, reliability engineering"],
-            ["Data Platforms", "ETL pipelines, Glue, EMR, SQL"]
-          ].map(([title, desc], i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.15 }}
-              className="rounded-2xl p-8 backdrop-blur bg-white/5 border border-white/10 hover:bg-white/10 hover:shadow-xl transition"
-            >
-              <h3 className="text-xl font-semibold mb-3">{title}</h3>
-              <p className="text-gray-400">{desc}</p>
-            </motion.div>
-          ))}
-        </div>
-      </section>
-
-      {/* ================= TESTIMONIALS ================= */}
-      <section className="py-32 bg-neutral-950">
-        <h2 className="text-3xl font-semibold text-center mb-12">
-          What People Say
-        </h2>
-        <Testimonials />
-      </section>
-
-      {/* ================= CTA ================= */}
-      <section className="py-32 bg-neutral-900 text-center">
-        <h2 className="text-4xl md:text-5xl font-bold mb-6">
+      {/* FINAL CTA */}
+      <section className="relative px-6 pb-40 text-center">
+        <h2 className="text-3xl md:text-4xl font-semibold mb-4">
           Let’s build something that scales.
         </h2>
-        <p className="text-gray-400 mb-10">
+        <p className="text-neutral-400 mb-8">
           Open to DevOps, SRE, and Cloud engineering roles.
         </p>
-        <MagneticButton to="/contact" primary>
-          Start a conversation
-        </MagneticButton>
-      </section>
 
-      {/* ================= FOOTER ================= */}
-      <footer className="border-t border-white/10 py-10 text-center text-gray-500 text-sm">
-        © {new Date().getFullYear()} Abhinavi · Crafted with precision
-      </footer>
-    </motion.main>
+        <Link
+          to="/contact"
+          className="inline-block px-6 py-3 rounded-xl bg-gradient-to-r from-indigo-500 to-pink-500 text-sm font-medium hover:scale-105 transition"
+        >
+          Get in touch
+        </Link>
+      </section>
+    </main>
   );
 }
