@@ -1,33 +1,91 @@
-import { motion } from "framer-motion";
+import { motion, useMotionValue, useMotionTemplate } from "framer-motion";
 import { Link } from "react-router-dom";
 
+const name = "Abhilash";
+
 export default function Home() {
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+
+  function handleMouseMove(e) {
+    const { left, top } = e.currentTarget.getBoundingClientRect();
+    mouseX.set(e.clientX - left);
+    mouseY.set(e.clientY - top);
+  }
+
   return (
-    <main className="relative min-h-screen bg-black text-white overflow-hidden">
+    <main
+      onMouseMove={handleMouseMove}
+      className="relative min-h-screen bg-black text-white overflow-hidden"
+    >
+      {/* ================= FILM GRAIN ================= */}
+      <div className="pointer-events-none absolute inset-0 z-50 opacity-[0.035] bg-[url('/grain.png')] mix-blend-overlay" />
+
+      {/* ================= CURSOR GLOW ================= */}
+      <motion.div
+        className="pointer-events-none absolute inset-0 -z-10"
+        style={{
+          background: useMotionTemplate`
+            radial-gradient(
+              700px circle at ${mouseX}px ${mouseY}px,
+              rgba(168,85,247,0.22),
+              transparent 65%
+            )
+          `,
+        }}
+      />
+
+      {/* FLOATING ORBS */}
+      <motion.div
+        animate={{ y: [0, -40, 0] }}
+        transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }}
+        className="absolute top-32 left-24 w-72 h-72 rounded-full bg-indigo-500/10 blur-3xl"
+      />
+      <motion.div
+        animate={{ y: [0, 50, 0] }}
+        transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
+        className="absolute bottom-32 right-24 w-80 h-80 rounded-full bg-pink-500/10 blur-3xl"
+      />
 
       {/* ================= HERO ================= */}
-      <section className="relative flex flex-col items-center justify-center text-center px-6 pt-40 pb-28">
-        {/* Ambient background */}
-        <div className="absolute inset-0 -z-10 bg-gradient-to-br from-indigo-500/20 via-purple-500/10 to-pink-500/20 blur-3xl" />
-
+      <section className="relative flex flex-col items-center justify-center text-center px-6 pt-44 pb-32">
         <motion.h1
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.9 }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1 }}
           className="text-4xl md:text-6xl font-semibold tracking-tight max-w-4xl"
         >
           Hi, I’m{" "}
-          <span className="bg-gradient-to-r from-indigo-400 to-pink-400 bg-clip-text text-transparent">
-            Abhilash
+          <span className="inline-flex">
+            {name.split("").map((char, i) => (
+              <motion.span
+                key={i}
+                initial={{ opacity: 0, y: 40 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{
+                  delay: 0.6 + i * 0.08,
+                  duration: 0.6,
+                  ease: "easeOut",
+                }}
+                whileHover={{
+                  scale: 1.2,
+                  textShadow: "0px 0px 40px rgba(168,85,247,1)",
+                }}
+                className="bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400
+                           bg-clip-text text-transparent cursor-default"
+              >
+                {char}
+              </motion.span>
+            ))}
           </span>
           .
         </motion.h1>
 
         <motion.p
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 25 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.9, delay: 0.15 }}
-          className="mt-6 text-neutral-400 max-w-2xl text-lg"
+          transition={{ duration: 1, delay: 1.4 }}
+          className="mt-10 text-neutral-400 max-w-2xl text-lg leading-relaxed"
         >
           A software engineer who enjoys building systems that work in the real
           world — reliable, scalable, and thoughtfully designed.
@@ -35,12 +93,16 @@ export default function Home() {
       </section>
 
       {/* ================= PERSONAL QUOTE ================= */}
-      <section className="px-6 py-24 text-center">
+      <section className="px-6 py-28 text-center">
         <motion.blockquote
-          initial={{ opacity: 0, y: 20 }}
+          whileHover={{
+            scale: 1.02,
+            textShadow: "0px 0px 30px rgba(255,255,255,0.15)",
+          }}
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.7 }}
+          transition={{ duration: 0.9 }}
           className="max-w-3xl mx-auto text-xl md:text-2xl italic text-neutral-300"
         >
           “I believe technology should feel calm, intuitive, and human —
@@ -53,12 +115,16 @@ export default function Home() {
       </section>
 
       {/* ================= PROFESSIONAL QUOTE ================= */}
-      <section className="px-6 py-24 text-center bg-white/5 backdrop-blur">
+      <section className="px-6 py-28 text-center bg-white/5 backdrop-blur">
         <motion.blockquote
-          initial={{ opacity: 0, y: 20 }}
+          whileHover={{
+            scale: 1.02,
+            textShadow: "0px 0px 35px rgba(168,85,247,0.35)",
+          }}
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.7 }}
+          transition={{ duration: 0.9 }}
           className="max-w-3xl mx-auto text-xl md:text-2xl italic text-neutral-200"
         >
           “Engineering resilient, scalable systems across cloud, data, and
@@ -70,52 +136,47 @@ export default function Home() {
         </p>
       </section>
 
-      {/* ================= PERSONAL + PROFESSIONAL SPLIT ================= */}
-      <section className="px-6 py-28 max-w-6xl mx-auto grid md:grid-cols-2 gap-8">
-        {/* Personal */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="rounded-3xl p-8 bg-white/5 border border-white/10 backdrop-blur"
-        >
-          <h3 className="text-lg font-medium mb-4">
-            Beyond the keyboard
-          </h3>
-          <p className="text-neutral-400 leading-relaxed">
-            Outside of work, I enjoy cooking, singing, and spending time learning
-            things that have nothing to do with code. I value balance, clarity,
-            and long-term thinking — in life as much as in engineering.
-          </p>
-        </motion.div>
-
-        {/* Professional */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.1 }}
-          className="rounded-3xl p-8 bg-white/5 border border-white/10 backdrop-blur"
-        >
-          <h3 className="text-lg font-medium mb-4">
-            At work
-          </h3>
-          <p className="text-neutral-400 leading-relaxed">
-            I work across DevOps, SRE, data platforms, and cloud infrastructure,
-            focusing on systems that are observable, maintainable, and built to
-            scale under real-world constraints.
-          </p>
-        </motion.div>
+      {/* ================= PERSONAL + PROFESSIONAL ================= */}
+      <section className="px-6 py-32 max-w-6xl mx-auto grid md:grid-cols-2 gap-10">
+        {[
+          {
+            title: "Beyond the keyboard",
+            text:
+              "Outside of work, I enjoy cooking, singing, and learning things that have nothing to do with code. I value balance, clarity, and long-term thinking — in life as much as in engineering.",
+            glow: "hover:border-indigo-400/50 hover:shadow-[0_0_35px_rgba(99,102,241,0.3)]",
+          },
+          {
+            title: "At work",
+            text:
+              "I work across DevOps, SRE, data platforms, and cloud infrastructure, focusing on systems that are observable, maintainable, and built to scale under real-world constraints.",
+            glow: "hover:border-pink-400/50 hover:shadow-[0_0_35px_rgba(236,72,153,0.3)]",
+          },
+        ].map((card) => (
+          <motion.div
+            key={card.title}
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            whileHover={{ y: -10 }}
+            transition={{ duration: 0.7 }}
+            className={`rounded-3xl p-10 bg-white/5 border border-white/10 backdrop-blur transition ${card.glow}`}
+          >
+            <h3 className="text-lg font-medium mb-4">{card.title}</h3>
+            <p className="text-neutral-400 leading-relaxed">{card.text}</p>
+          </motion.div>
+        ))}
       </section>
 
       {/* ================= FINAL CTA ================= */}
-      <section className="px-6 pb-40 text-center">
+      <section className="px-6 pb-44 text-center">
         <motion.h2
-          initial={{ opacity: 0, y: 20 }}
+          whileHover={{
+            textShadow: "0px 0px 40px rgba(168,85,247,0.6)",
+          }}
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.7 }}
+          transition={{ duration: 0.8 }}
           className="text-3xl md:text-4xl font-semibold mb-6"
         >
           Personal values. Professional execution.
@@ -125,15 +186,19 @@ export default function Home() {
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.7, delay: 0.1 }}
-          className="text-neutral-400 mb-10"
+          transition={{ duration: 0.8, delay: 0.15 }}
+          className="text-neutral-400 mb-12"
         >
           Open to meaningful conversations, collaborations, and opportunities.
         </motion.p>
 
         <Link
           to="/contact"
-          className="inline-block px-7 py-3 rounded-xl bg-gradient-to-r from-indigo-500 to-pink-500 text-sm font-medium hover:scale-105 transition"
+          className="inline-block px-8 py-4 rounded-xl
+                     bg-gradient-to-r from-indigo-500 to-pink-500
+                     text-sm font-medium
+                     hover:scale-110 hover:shadow-[0_0_40px_rgba(168,85,247,0.7)]
+                     transition"
         >
           Get in touch
         </Link>
@@ -141,4 +206,3 @@ export default function Home() {
     </main>
   );
 }
-
