@@ -1,140 +1,116 @@
-import { Link, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-
-const menuLinks = [
-  { name: "Home", path: "/" },
-  { name: "About", path: "/about" },
-  { name: "Education", path: "/education" },
-  { name: "Experience", path: "/experience" },
-  { name: "Skills", path: "/skills" },
-  { name: "Projects", path: "/projects" },
-  { name: "Contact", path: "/contact" },
-];
+import { Link } from "react-router-dom";
+import logo from "../assets/logo.png"; // update if path differs
 
 export default function Navbar() {
-  const { pathname } = useLocation();
-  const [open, setOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
   const [time, setTime] = useState(new Date());
+  const [open, setOpen] = useState(false);
 
-  /* Blur on scroll */
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 10);
-    window.addEventListener("scroll", onScroll);
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
-  /* Live date & time */
   useEffect(() => {
     const timer = setInterval(() => setTime(new Date()), 1000);
     return () => clearInterval(timer);
   }, []);
 
+  const navLinks = [
+    { name: "Home", path: "/" },
+    { name: "About", path: "/about" },
+    { name: "Education", path: "/education" },
+    { name: "Experience", path: "/experience" },
+    { name: "Skills", path: "/skills" },
+    { name: "Projects", path: "/projects" },
+    { name: "Contact", path: "/contact" },
+  ];
+
   return (
     <>
-      {/* ================= NAVBAR ================= */}
-      <nav
-        className={`fixed top-0 left-0 w-full z-50 transition-all duration-300
-        ${
-          scrolled
-            ? "bg-black/60 backdrop-blur-xl border-b border-white/10"
-            : "bg-transparent"
-        }`}
-      >
-        <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+      {/* NAVBAR */}
+      <nav className="fixed top-0 z-50 w-full backdrop-blur-xl bg-black/60 border-b border-white/10">
+        <div className="flex items-center justify-between px-6 py-4">
 
-          {/* LEFT: LOGO */}
-          <Link
-            to="/"
-            className="text-lg font-semibold tracking-tight text-white"
-          >
-            Abhinavi<span className="text-indigo-400">.</span>
-          </Link>
-
-          {/* ================= CENTER MESSAGE ================= */}
-          
-          <div className="hidden md:block text-xs text-neutral-400 italic tracking-wide">
-            🚧 Site under development
-          </div>
-         
-          {/* ================================================== */}
-
-          {/* RIGHT: TIME + HAMBURGER */}
-          <div className="flex items-center gap-6">
-            <div className="hidden sm:block text-xs text-neutral-400 text-right leading-tight">
-              <div>
-                {time.toLocaleDateString(undefined, {
-                  weekday: "short",
-                  day: "numeric",
-                  month: "short",
-                })}
-              </div>
-              <div className="font-mono">
-                {time.toLocaleTimeString()}
-              </div>
-            </div>
-
+          {/* LEFT — Hamburger + Logo */}
+          <div className="flex items-center gap-4">
+            {/* Hamburger */}
             <button
               onClick={() => setOpen(true)}
-              className="text-xl text-white hover:text-indigo-400 transition"
+              className="text-white hover:text-indigo-400 transition"
               aria-label="Open menu"
             >
-              ☰
+              <svg width="26" height="26" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M3 6h20M3 13h20M3 20h20" />
+              </svg>
             </button>
+
+            {/* Logo */}
+            <Link to="/" className="flex items-center gap-3">
+              <img
+                src={logo}
+                alt="Abhinavi logo"
+                className="w-12 h-12 object-contain transition
+                           hover:drop-shadow-[0_0_14px_rgba(99,102,241,0.6)]"
+              />
+              <span className="text-xl font-semibold tracking-tight text-white">
+                Abhinavi<span className="text-indigo-400">.</span>
+              </span>
+            </Link>
+          </div>
+
+          {/* CENTER — OPTIONAL MESSAGE */}
+          {/*
+          <div className="hidden md:flex text-sm text-white/60 italic">
+            🚧 Site under development
+          </div>
+          */}
+
+          {/* RIGHT — Date & Time */}
+          <div className="hidden md:flex flex-col items-end text-xs text-white/70 font-mono leading-relaxed">
+            <span>
+              {time.toLocaleDateString("en-IN", {
+                weekday: "short",
+                day: "2-digit",
+                month: "short",
+              })}
+            </span>
+            <span className="tracking-wide">
+              {time.toLocaleTimeString([], {
+                hour: "2-digit",
+                minute: "2-digit",
+                second: "2-digit",
+              })}
+            </span>
           </div>
         </div>
       </nav>
 
-      {/* ================= HAMBURGER MENU ================= */}
-      <AnimatePresence>
-        {open && (
-          <motion.div
-            className="fixed inset-0 z-50 bg-black/70 backdrop-blur"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={() => setOpen(false)}
-          >
-            <motion.div
-              className="absolute top-0 right-0 h-full w-72 bg-neutral-950 border-l border-white/10 p-6"
-              initial={{ x: 300 }}
-              animate={{ x: 0 }}
-              exit={{ x: 300 }}
-              transition={{ type: "spring", stiffness: 120 }}
-              onClick={(e) => e.stopPropagation()}
+      {/* SIDE DRAWER */}
+      {open && (
+        <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm">
+          <div className="absolute left-0 top-0 h-full w-72 bg-black border-r border-white/10 p-6">
+            <button
+              onClick={() => setOpen(false)}
+              className="mb-8 text-white/70 hover:text-indigo-400 transition"
             >
-              <div className="flex justify-between items-center mb-8">
-                <span className="text-lg font-semibold">Navigation</span>
-                <button
-                  onClick={() => setOpen(false)}
-                  className="text-neutral-400 hover:text-white transition"
-                >
-                  ✕
-                </button>
-              </div>
+              ✕ Close
+            </button>
 
-              <nav className="flex flex-col gap-4">
-                {menuLinks.map((link) => (
+            <ul className="space-y-6 text-lg">
+              {navLinks.map((item) => (
+                <li key={item.name}>
                   <Link
-                    key={link.name}
-                    to={link.path}
+                    to={item.path}
                     onClick={() => setOpen(false)}
-                    className={`text-sm transition
-                      ${
-                        pathname === link.path
-                          ? "text-white"
-                          : "text-neutral-400 hover:text-white"
-                      }`}
+                    className="block text-white/80 hover:text-indigo-400 transition"
                   >
-                    {link.name}
+                    {item.name}
                   </Link>
-                ))}
-              </nav>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      )}
+
+      {/* SPACER */}
+      <div className="h-20" />
     </>
   );
 }
