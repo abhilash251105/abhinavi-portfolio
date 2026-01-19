@@ -26,26 +26,26 @@ const socials = [
     link: "abhilashtmca2023@gmail.com",
     value: "abhilashtmca2023@gmail.com",
   },
-  {
-    name: "Instagram",
-    icon: Instagram,
-    link: "https://instagram.com/YOUR_USERNAME",
-  },
-  {
-    name: "Telegram",
-    icon: Send,
-    link: "https://t.me/YOUR_USERNAME",
-  },
-  {
-    name: "Snapchat",
-    icon: MessageCircle,
-    link: "https://snapchat.com/add/YOUR_USERNAME",
-  },
-  {
-    name: "Facebook",
-    icon: Facebook,
-    link: "https://facebook.com/YOUR_USERNAME",
-  },
+  // {
+  //   name: "Instagram",
+  //   icon: Instagram,
+  //   link: "https://instagram.com/YOUR_USERNAME",
+  // },
+  // {
+  //   name: "Telegram",
+  //   icon: Send,
+  //   link: "https://t.me/YOUR_USERNAME",
+  // },
+  // {
+  //   name: "Snapchat",
+  //   icon: MessageCircle,
+  //   link: "https://snapchat.com/add/YOUR_USERNAME",
+  // },
+  // {
+  //   name: "Facebook",
+  //   icon: Facebook,
+  //   link: "https://facebook.com/YOUR_USERNAME",
+  // },
 ];
 
 export default function Contact() {
