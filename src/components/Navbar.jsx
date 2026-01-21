@@ -22,10 +22,16 @@ export default function Navbar() {
 
   return (
     <>
-      <nav className="fixed top-0 z-50 w-full backdrop-blur-xl bg-black/60 border-b border-white/10">
+      <nav
+        className="fixed top-0 z-50 w-full
+                   backdrop-blur-xl bg-black/60
+                   border-b border-white/10
+                   transition
+                   hover:shadow-[0_0_40px_rgba(139,92,246,0.15)]"
+      >
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
 
-          {/* LEFT — LOGO + BRAND */}
+          {/* LEFT — LOGO + BRAND (UNCHANGED) */}
           <Link to="/" className="flex items-center gap-3 group">
             <img
               src={logo}
@@ -34,7 +40,6 @@ export default function Navbar() {
                          group-hover:drop-shadow-[0_0_18px_rgba(168,85,247,0.7)]"
             />
 
-            {/* BRAND TEXT MAGIC */}
             <span
               className="relative text-xl font-semibold tracking-wide
                          bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400
@@ -45,47 +50,60 @@ export default function Navbar() {
             >
               Abhinavi<span className="text-white/80">.</span>
 
-              {/* UNDERLINE GLOW */}
-              <span className="absolute left-0 -bottom-1 w-full h-[2px]
-                               bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400
-                               scale-x-0 group-hover:scale-x-100
-                               transition-transform origin-left duration-500" />
+              <span
+                className="absolute left-0 -bottom-1 w-full h-[2px]
+                           bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400
+                           scale-x-0 group-hover:scale-x-100
+                           transition-transform origin-left duration-500"
+              />
             </span>
           </Link>
 
-          {/* CENTER — NAV LINKS */}
+          {/* CENTER — NAV LINKS (ENHANCED) */}
           <div className="hidden md:flex items-center gap-8">
             {navLinks.map((item) => (
               <NavLink
                 key={item.name}
                 to={item.path}
                 className={({ isActive }) =>
-                  `relative text-sm font-medium transition
-                   ${isActive ? "text-indigo-400" : "text-white/70 hover:text-white"}`
+                  `
+                  relative text-sm font-medium transition-all duration-300
+                  ${isActive
+                    ? "text-indigo-400 drop-shadow-[0_0_14px_rgba(99,102,241,0.9)]"
+                    : "text-white/70 hover:text-white"}
+                  
+                  hover:drop-shadow-[0_0_14px_rgba(168,85,247,0.8)]
+                  `
                 }
               >
                 {item.name}
 
-                {/* Hover underline */}
+                {/* UNDERLINE GLOW */}
                 <span
                   className="absolute left-0 -bottom-1 w-full h-[2px]
-                             bg-indigo-400 scale-x-0 hover:scale-x-100
-                             transition-transform origin-left"
+                             bg-gradient-to-r from-indigo-400 to-pink-400
+                             scale-x-0 group-hover:scale-x-100
+                             transition-transform origin-left duration-300"
                 />
               </NavLink>
             ))}
           </div>
 
-          {/* RIGHT — TIME */}
-          <div className="hidden md:flex flex-col items-end text-xs text-white/60 font-mono">
-            <span>
+          {/* RIGHT — DATE & TIME (ENHANCED) */}
+          <div
+            className="hidden md:flex flex-col items-end text-xs font-mono
+                       text-white/60 transition
+                       hover:text-white
+                       hover:drop-shadow-[0_0_18px_rgba(236,72,153,0.9)]"
+          >
+            <span className="tracking-wide">
               {time.toLocaleDateString("en-IN", {
                 weekday: "short",
                 day: "2-digit",
                 month: "short",
               })}
             </span>
-            <span className="tracking-wide">
+            <span className="tracking-widest">
               {time.toLocaleTimeString([], {
                 hour: "2-digit",
                 minute: "2-digit",
