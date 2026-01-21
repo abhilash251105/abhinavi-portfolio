@@ -190,22 +190,22 @@ const educationData = [
 const certifications = [
   {
     name: "AWS Certified Solutions Architect – Associate",
-    link: "https://www.credly.com/",
+    link: "https://www.credly.com/earner/earned/badge/16c0be1f-2382-4c56-8382-dc56f705ec4a",
   },
   {
     name: "AWS Certified Developer – Associate",
-    link: "https://www.credly.com/",
+    link: "https://www.credly.com/earner/earned/badge/b305d33c-fd3d-4241-a655-d62c81135601",
   },
   {
     name: "AWS Certified Cloud Practitioner",
-    link: "https://www.credly.com/",
+    link: "https://www.credly.com/earner/earned/badge/f0205b45-a796-46e9-9efb-2f5c963b4795",
   },
   {
     name: "Yugabyte Certified",
-    link: "https://www.yugabyte.com/",
+    link: "https://www.credential.net/cec03fc0-c9c1-43e6-86f4-c37a7df23b98#acc.4eCO7o6d",
   },
   {
     name: "OpenTofu Certified",
-    link: "https://opentofu.org/",
+    link: "https://www.credly.com/earner/earned/badge/b6f67ff5-2cb3-430e-a22a-e6687d849237",
   },
 ];
