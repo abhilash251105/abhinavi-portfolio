@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-
+import { Link } from "react-router-dom";
 const fadeUp = {
   hidden: { opacity: 0, y: 60 },
   visible: {
@@ -226,14 +226,16 @@ export default function Experience() {
             I continue to grow with discipline, curiosity, and intent.
           </p>
 
-          <a
-            href="/contact"
+          <Link
+            to="/contact"
             className="inline-block px-8 py-4 rounded-full
-                       bg-gradient-to-r from-indigo-500 to-pink-500
-                       text-white font-medium hover:opacity-90 transition"
+                      bg-gradient-to-r from-indigo-500 to-pink-500
+                      text-white font-medium
+                      hover:scale-105 hover:shadow-[0_0_35px_rgba(168,85,247,0.6)]
+                      transition"
           >
             Let’s talk
-          </a>
+          </Link>
         </motion.div>
       </section>
     </main>
