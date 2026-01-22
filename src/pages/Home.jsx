@@ -39,12 +39,14 @@ export default function Home() {
       <motion.div
         animate={{ y: [0, -40, 0] }}
         transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute top-32 left-24 w-72 h-72 rounded-full bg-indigo-500/10 blur-3xl"
+        className="pointer-events-none absolute top-32 left-24 -z-10
+             w-72 h-72 rounded-full bg-indigo-500/10 blur-3xl"  
       />
       <motion.div
         animate={{ y: [0, 50, 0] }}
         transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute bottom-32 right-24 w-80 h-80 rounded-full bg-pink-500/10 blur-3xl"
+        className="pointer-events-none absolute bottom-32 right-24 -z-10
+             w-80 h-80 rounded-full bg-pink-500/10 blur-3xl"
       />
 
       {/* ================= HERO ================= */}
