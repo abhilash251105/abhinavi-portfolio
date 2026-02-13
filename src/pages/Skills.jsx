@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 60 },
@@ -120,14 +121,16 @@ export default function Skills() {
             context, and responsibility.
           </p>
 
-          <a
-            href="/projects"
+          {/* FIXED BUTTON */}
+          <Link
+            to="/projects"
             className="inline-block px-8 py-4 rounded-full
                        bg-gradient-to-r from-indigo-500 to-pink-500
                        text-white font-medium hover:opacity-90 transition"
           >
             See my work
-          </a>
+          </Link>
+
         </motion.div>
       </section>
     </main>

@@ -1,5 +1,13 @@
-import { motion, useMotionValue, useMotionTemplate } from "framer-motion";
+import {
+  motion,
+  useMotionValue,
+  useMotionTemplate,
+  useTransform,
+  useSpring,
+} from "framer-motion";
 import { Link } from "react-router-dom";
+import { useRef } from "react";
+import profilePic from "../assets/mypic.jpeg"; // adjust path if needed
 
 const name = "Abhilash";
 
@@ -7,10 +15,32 @@ export default function Home() {
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
 
+  const imageRef = useRef(null);
+
+  // Parallax tilt for image
+  const rotateX = useTransform(mouseY, [-200, 200], [12, -12]);
+  const rotateY = useTransform(mouseX, [-200, 200], [-12, 12]);
+
+  const smoothRotateX = useSpring(rotateX, { stiffness: 120, damping: 15 });
+  const smoothRotateY = useSpring(rotateY, { stiffness: 120, damping: 15 });
+
   function handleMouseMove(e) {
     const { left, top } = e.currentTarget.getBoundingClientRect();
     mouseX.set(e.clientX - left);
     mouseY.set(e.clientY - top);
+  }
+
+  function handleImageMove(e) {
+    const rect = imageRef.current.getBoundingClientRect();
+    const x = e.clientX - rect.left - rect.width / 2;
+    const y = e.clientY - rect.top - rect.height / 2;
+    mouseX.set(x);
+    mouseY.set(y);
+  }
+
+  function resetImage() {
+    mouseX.set(0);
+    mouseY.set(0);
   }
 
   return (
@@ -40,7 +70,7 @@ export default function Home() {
         animate={{ y: [0, -40, 0] }}
         transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }}
         className="pointer-events-none absolute top-32 left-24 -z-10
-             w-72 h-72 rounded-full bg-indigo-500/10 blur-3xl"  
+             w-72 h-72 rounded-full bg-indigo-500/10 blur-3xl"
       />
       <motion.div
         animate={{ y: [0, 50, 0] }}
@@ -51,6 +81,83 @@ export default function Home() {
 
       {/* ================= HERO ================= */}
       <section className="relative flex flex-col items-center justify-center text-center px-6 pt-44 pb-32">
+        
+        {/* ================= PROFILE IMAGE ================= */}
+        <motion.div
+          ref={imageRef}
+          onMouseMove={handleImageMove}
+          onMouseLeave={resetImage}
+          initial={{ opacity: 0, scale: 0.8, y: 40 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          transition={{ duration: 1 }}
+          style={{
+            rotateX: smoothRotateX,
+            rotateY: smoothRotateY,
+            transformStyle: "preserve-3d",
+          }}
+          className="relative mb-16"
+        >
+          {/* Rotating Gradient Glow */}
+          <motion.div
+            animate={{ rotate: 360 }}
+            transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+            className="absolute -inset-6 rounded-3xl
+                       bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500
+                       blur-3xl opacity-30"
+          />
+
+          {/* Glass Morph Card */}
+          <div className="relative rounded-3xl p-6
+                          bg-white/5 backdrop-blur-xl
+                          border border-white/10
+                          shadow-[0_0_60px_rgba(168,85,247,0.25)] overflow-hidden">
+
+            {/* Hover Lift Wrapper */}
+            <motion.div
+              whileHover={{ y: -8 }}
+              transition={{ type: "spring", stiffness: 200 }}
+              className="relative"
+            >
+              {/* Light Sweep */}
+              <motion.div
+                initial={{ x: "-150%" }}
+                animate={{ x: "150%" }}
+                transition={{
+                  duration: 3,
+                  repeat: Infinity,
+                  repeatDelay: 5,
+                  ease: "easeInOut",
+                }}
+                className="absolute inset-0 z-10
+                           bg-gradient-to-r from-transparent via-white/20 to-transparent
+                           skew-x-12"
+              />
+
+              <motion.img
+                src={profilePic}
+                alt="Abhilash"
+                className="w-56 h-64 md:w-64 md:h-72 object-cover
+                           rounded-2xl shadow-2xl"
+                animate={{
+                  y: [0, -10, 0],
+                  scale: [1, 1.02, 1],
+                }}
+                transition={{
+                  y: { duration: 6, repeat: Infinity, ease: "easeInOut" },
+                  scale: { duration: 8, repeat: Infinity, ease: "easeInOut" },
+                }}
+                style={{
+                  boxShadow: `
+                    0px 20px 60px rgba(0,0,0,0.6),
+                    0px 0px 40px rgba(168,85,247,0.25)
+                  `,
+                }}
+              />
+            </motion.div>
+          </div>
+        </motion.div>
+
+        {/* ================= NAME ================= */}
         <motion.h1
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
